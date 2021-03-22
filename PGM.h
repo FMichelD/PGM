@@ -6,16 +6,7 @@
 #include <stdbool.h>
 #include <stdint.h>
 
-typedef struct PGMPixel{
-    int grayValue;
-}PGMPixel;
-
-typedef struct PGMImage{
-    int rows;
-    int cols;
-    int whiteDepth;
-    PGMPixel *pixels;
-}PGMImage;
+typedef struct PGMImage PGMImage;
 
 PGMImage* createPGMImage();
 void deletePGM(PGMImage *img);

@@ -1,6 +1,18 @@
 #include <PGM.h>
 
 //Private
+typedef struct PGMPixel{
+    int grayValue;
+}PGMPixel;
+
+typedef struct PGMImage{
+    int rows;
+    int cols;
+    int whiteDepth;
+    PGMPixel *pixels;
+}PGMImage;
+
+
 static bool isImageFormatValid(const char *buffer)
 {
     if(buffer[0] == 'P' && buffer[1] == '2')
