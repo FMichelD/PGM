@@ -107,6 +107,8 @@ void savePGM(const char *fileName, const PGMImage *img)
         }
         fprintf(ImgToSave, "\n");
     }
+
+    fclose(ImgToSave);
 }
 
 PGMImage* invertColor(const PGMImage *img)
