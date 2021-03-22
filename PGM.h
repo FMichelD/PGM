@@ -19,8 +19,9 @@ typedef struct PGMImage{
 
 PGMImage* createPGMImage();
 void deletePGM(PGMImage *img);
-
-PGMImage* readPGMFromFile(FILE *imgFile);
 void savePGM(const char *fileName, const PGMImage *img);
-PGMImage *invertColor(const PGMImage *img);
+PGMImage* readPGMFromFile(FILE *imgFile);
+PGMImage* invertColor(const PGMImage *img);
+PGMImage* brightenImage(const PGMImage *img, int brighten);
+
 #endif

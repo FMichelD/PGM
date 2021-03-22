@@ -97,7 +97,7 @@ void savePGM(const char *fileName, const PGMImage *img)
     }
 }
 
-PGMImage *invertColor(const PGMImage *img)
+PGMImage* invertColor(const PGMImage *img)
 {
     PGMImage *invertedColor = (PGMImage*)malloc(sizeof(PGMImage));
     invertedColor->cols = img->cols;
@@ -113,46 +113,32 @@ PGMImage *invertColor(const PGMImage *img)
     return invertedColor;
 }
 
+PGMImage* brightenImage(const PGMImage *img, int brighten)
+{
+    PGMImage *brightest = (PGMImage*)malloc(sizeof(PGMImage));
+    brightest->cols = img->cols;
+    brightest->rows = img->rows;    
+    createPixeis(brightest);
 
+    for(int i = 0; i < (img->cols * img->rows); i++)
+    {
+        int result = img->pixels[i].grayValue + brighten; 
 
-// PGMImage* readPGMFromInput()
-// {
-//     char buffer[16];
+        if(result <= 255)
+        {
+            brightest->pixels[i].grayValue = img->pixels[i].grayValue + brighten;
+        }else{
+            brightest->pixels[i].grayValue = 255;
+        }
+        
+        int newDepth = img->whiteDepth + brighten;
+        if(newDepth <= 255 )
+        {
+            brightest->whiteDepth = img->whiteDepth + brighten;
+        }else{
+            brightest->whiteDepth = 255;
+        }
+    }
 
-//     //Read 1st line with file format
-//     fgets(buffer, sizeof(buffer), stdin);
-//     if(!isImageFormatValid((const char *)&buffer))
-//     {
-//         printf("Invalid image format (must be 'P2')\n");
-//         exit(1);
-//     }
-
-//     PGMImage *img = createPGMImage();
-
-//     //Get image size
-//     scanf("%d %d", &img->cols, &img->rows);
-//     printf("rows = %d\ncols = %d\n", img->rows, img->cols);
-
-//     //Memory allocation for "rows x cols" PGMPixels
-//     img->pixels = (PGMPixel*)malloc(img->rows * img->cols * sizeof(PGMPixel));
-
-//     //Get max value for white color
-//     scanf("%d", &img->whiteDepth);
-//     printf("white = %d\n", img->whiteDepth);
-
-//     //Read pixels
-//     int value;
-    
-//     int i;
-//     for(i = 0; i < img->rows * img->cols; i++)
-//     {        
-//         scanf("%d", &value);
-//         img->pixels[i].grayValue = value;    
-//     }    
-
-
-
-//     return img;
-// }
-
-
+    return brightest;
+}
